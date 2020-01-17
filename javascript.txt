@@ -1,0 +1,58 @@
+var appId = 'fb7397c5e4c2ced9ca725baa9ff32ef3';
+var units = 'imperial';
+var searchMethod;
+
+function getSearchMethod(searchTerm) {
+    if (searchTerm.length === 5 && Number.parseInt(searchTerm) + '' === searchTerm)
+        searchMethod = 'zip';
+    else
+        searchMethod = 'q';
+}
+
+function searchWeather(searchTerm) {
+    getSearchMethod(searchTerm);
+    fetch(http://api.openweathermap.org/data/2.5/weather?${searchMethod}=${searchTerm}&APPID=${appId}&units=${units}).then(result => {
+        return result.json();
+
+    }).then(result => {
+        init(result);
+    })
+
+}
+function init(resultFromServer) {
+    switch (resultFromServer.weather[0].main) {
+        case 'Clear':
+            document.body.style.backgroundImage='url("img/cielo_despejado.jpg")';
+            break;
+        case 'Clouds': //nublado
+            document.body.style.backgroundImage='url("img/cloud.jpg")';
+            break;
+        case 'Rain': //lluvia
+            document.body.style.backgroundImage='url("img/rain.jpg")';
+            break;
+        case 'Drizzle': //llovizna
+            document.body.style.backgroundImage='url("img/drizzle.JPG")';
+            break;
+        case 'Mist': //bruma
+            document.body.style.backgroundImage='url("img/neblinas.JPG")';
+            break;
+        case 'Thunderstorm': //tormenta
+            document.body.style.backgroundImage='url("img/Thunderstorm.jpg")';
+            break;
+        case 'Snow': //nieve
+            document.body.style.backgroundImage='url("img/nieve.jpg")';
+            break;
+        default:
+            break;
+    }
+    let weatherDescriptionHeader= document.getElementById('weatherDescriptionHeader');
+    let temperatureElement =
+
+}
+document.getElementById('searchBtn').addEventListener("click", () => {
+    var searchTerm = document.getElementById('searchInput').value;
+    if (searchTerm)
+        searchWeather(searchTerm);
+
+
+})
